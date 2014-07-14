@@ -1,0 +1,18 @@
+h4 {
+	font-weight: bold;
+	font-style: oblique;
+}
+
+textarea {
+	height: 100px;
+	width: 550px;
+}
+
+#show-results {
+	display: none;
+}
+
+.photo-width {
+	width: 100px;
+	padding: 8px;
+}
