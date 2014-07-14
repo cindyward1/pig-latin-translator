@@ -19,33 +19,25 @@ var pigLatinTranslator = function (inputSentence) {
   inputSentence = inputSentence.toLowerCase(); // strip off any capital letters
   var inputSentenceArray = inputSentence.split(" "); // split up the sentence into an array of words
   var outputSentence = "";
-  var currentWord, restOfWord, firstLetter;
-  var precedingQ = false;
-  var leadingY = false;
+  var currentWord, resultMatch;
+  var lettersToSlice = 1;
 
   for (var index1 = 0; index1 < inputSentenceArray.length; index1++) {
 
-    currentWord = inputSentenceArray[index1];
-    firstLetter = currentWord.slice(0,1);
-    
-    if (firstLetter === "y") {
-      leadingY = true;
-    };
+    currentWord = inputSentenceArray[index1].match(/[a-z]*/g).join(""); // let only letters pass through
 
-    while (!isAVowel(firstLetter) || (firstLetter === "u" && precedingQ) || leadingY) {
-      leadingY = false;
-      if (firstLetter === "q") {
-        precedingQ = true;
-      };
-      restOfWord = currentWord.slice(1,currentWord.length) + firstLetter;
-      firstLetter = restOfWord.slice(0,1);
-      currentWord = restOfWord;
+    resultMatch = currentWord.match(/(^qu|[^aeiou]*qu|[^aeiou]*)([a-z]*)/); // matches any number of leading consonants or 'qu'
+
+    if (resultMatch[1]) {
+      currentWord = resultMatch[2] + resultMatch[1];
     };
 
     outputSentence = outputSentence + currentWord + "ay";
 
     if (index1 < inputSentenceArray.length - 1) { // not the last word
       outputSentence = outputSentence + " "; // put a space between words
+    } else {
+      outputSentence = outputSentence + "."; // put a period at the end of the sentence
     };
 
   };
