@@ -26,7 +26,7 @@ var pigLatinTranslator = function (inputSentence) {
 
     currentWord = inputSentenceArray[index1].match(/[a-z]*/g).join(""); // let only letters pass through
 
-    resultMatch = currentWord.match(/(^qu|[^aeiou]*qu|[^aeiou]*)([a-z]*)/); // matches any number of leading consonants or 'qu'
+    resultMatch = currentWord.match(/(^qu|[^aeiou]*qu|^y|[^aeiouy]*)([a-z]*)/); // matches any number of leading consonants or 'qu'
 
     if (resultMatch[1]) {
       currentWord = resultMatch[2] + resultMatch[1];
